@@ -57,6 +57,10 @@ function deleteBook(target) {
     }
 }
 
+function changeStatus(target) {
+    console.log(target.parentElement);
+}
+
 
 submitList.addEventListener('submit', e => {
     e.preventDefault();
@@ -68,4 +72,8 @@ submitList.addEventListener('submit', e => {
 
 document.querySelector('#bookRow').addEventListener('click', e => {
     deleteBook(e.target);
+
+    changeStatus(e.target);
+
+    console.log(myLibrary);
 })
