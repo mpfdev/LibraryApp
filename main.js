@@ -1,17 +1,22 @@
-const submitBtn = document.querySelector('#bookList');
-
+const submitList = document.querySelector('#bookList');
 
 let myLibrary = [];
 
-//The Constructor
-function Book(title, author, pages, isRead) {
+function clearFields() {
+    document.querySelector('#bookName').value = '';
+    document.querySelector('#bookAuthor').value = '';
+    document.querySelector('#bookPages').value = '';
+    document.querySelector('#bookIsRead').selectedIndex = null;
+}
+
+function Book(title, author, pages, isRead, id) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
+    this.id = id;
 }
 
-//Do stuff
 function addBookToLibrary(book) {
     myLibrary.push(book);
 
@@ -20,56 +25,47 @@ function addBookToLibrary(book) {
     const row = document.createElement('tr');
 
     row.innerHTML = `
-            <td>${book.title}</td>
-            <td>${book.author}</td>
-            <td>${book.pages}</td>
-            <td>
-            <button class="btn btn-outline-info">${book.isRead === 'true' ? 'Read' : 'Not Read'}</button>
-            </td>
-            <td>
-            <button class="btn btn-danger">Delete</button>
-            </td>
-        `
+        <td>${book.title}</td>
+        <td>${book.author}</td>
+        <td>${book.pages}</td>
+        <td><button class="btn btn-outline-info">${book.isRead === 'true' ? 'Read' : 'Not Read'}</button></td>
+        <td><button class="btn btn-danger delete">Delete</button></td>
+    `
+
+    row.classList.add(`${book.id}`);
 
     tBody.appendChild(row);
-
 }
 
-function displayBooks(arrayBooks) {
-    arrayBooks.forEach(book => {
-        addBookToLibrary(book)
-    })
+function createBook() {
+    const id = Math.floor(Math.random() * 10000);
+
+    const bookTitle = document.querySelector('#bookName').value;
+    const bookAuthor = document.querySelector('#bookAuthor').value;
+    const bookPages = document.querySelector('#bookPages').value;
+    const bookIsRead = document.querySelector('#bookIsRead').value;
+    const book = new Book(bookTitle, bookAuthor, bookPages, bookIsRead, id);
+
+    clearFields();
+
+    return book;
 }
 
-function clearField() {
-    document.querySelector('#bookName').value = '';
-    document.querySelector('#bookAuthor').value = '';
-    document.querySelector('#bookPages').value = '';
-    document.querySelector('#isRead').selectedIndex = null;
+function deleteBook(target) {
+    if (target.classList.contains('delete')) {
+        target.parentElement.parentElement.remove();
+    }
 }
 
-//Events
-//Page On Load
-document.addEventListener('DOMContentLoaded', displayBooks(myLibrary));
 
-//New Entry
-submitBtn.addEventListener('submit', (e) => {
+submitList.addEventListener('submit', e => {
     e.preventDefault();
 
-    let bookTitle = document.querySelector('#bookName').value;
-    let bookAuthor = document.querySelector('#bookAuthor').value;
-    let bookPages = document.querySelector('#bookPages').value;
-    let bookIsRead = document.querySelector('#isRead').value;
+    const newBook = createBook();
+    addBookToLibrary(newBook);
 
-    //Create new book
-    let book = new Book(bookTitle, bookAuthor, bookPages, bookIsRead);
+})
 
-    clearField();
-
-    //Add Book to Library
-    addBookToLibrary(book);
-
-    console.log(myLibrary);
-
-
+document.querySelector('#bookRow').addEventListener('click', e => {
+    deleteBook(e.target);
 })
