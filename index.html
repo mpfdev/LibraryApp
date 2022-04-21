@@ -6,82 +6,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library App</title>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-
+    <!--CSS SPECTRE-->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
 </head>
 
 <body>
-    <main class="container">
-        <section class="header pt-5">
-            <h1>Library App</h1>
-            <p>This is a project for <a href="https://www.theodinproject.com/lessons/node-path-javascript-library">The
-                    Odin Project</a> in which I have
-                to make a Library using <em>Object Constructors</em>.</p>
-            <p>Repo: <a href="https://github.com/mpfdev/LibraryApp">Github Repo</a></p>
-        </section>
+    <div class="container">
+        <!--HERO-->
+        <div class="hero bg-gray">
+            <div class="hero-body">
+                <h1>Library App</h1>
+                <p>This is a project for The Odin Project</p>
+            </div>
+        </div>
 
-        <section class="addBook mt-5">
-
+        <!--FORM-->
+        <form>
             <fieldset>
-                <legend>Add a new book</legend>
-                <form id="bookList">
-                    <div class="row">
-                        <div class="col">
-                            <label for="bookName" class="form-label">Book</label>
-                            <input min="2" type="text" name="bookName" id="bookName" class="form-control" required>
+                <legend>Book Information</legend>
+                <div class="columns">
+                    <div class="column col-6 col-mx-auto">
+                        <div class="form-group">
+                            <label for="bookTitle" class="form-label">Book Title</label>
+                            <input type="text" class="form-input" id="bookTitle" required>
                         </div>
 
-                        <div class="col">
-                            <label for="bookAuthor" class="form-label">Author</label>
-                            <input min="2" type="text" name="bookAuthor" id="bookAuthor" class="form-control" required>
-                        </div>
+                        <div class="columns">
+                            <div class="column col-6">
+                                <div class="form-group">
+                                    <label for="bookAuthor" class="form-label">Book Author</label>
+                                    <input type="text" class="form-input" id="bookAuthor" required>
+                                </div>
+                            </div>
 
-                        <div class="col">
-                            <label for="bookPages" class="form-label">Number of Pages</label>
-                            <input min="2" type="number" name="bookPages" id="bookPages" class="form-control" required>
-                        </div>
-
-                        <div class="col">
-                            <label for="bookIsRead" class="form-label">Read</label>
-                            <select name="bookIsRead" id="bookIsRead" class="form-select mb-3">
-                                <option value="true">Read</option>
-                                <option value="false">Not Read</option>
-                            </select>
+                            <div class="column col-6">
+                                <div class="form-group">
+                                    <label for="bookPages" class="form-label">Book Pages</label>
+                                    <input type="number" class="form-input" id="bookPages" required>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <input type="submit" class="btn btn-primary" value="Add Book" id="submitBtn">
-                </form>
+
+
+                    <div class="column col-3 col-mx-auto mt-5">
+                        <div class="form-group">
+                            <label class="form-label">Status</label>
+                            <label class="form-radio">
+                                <input type="radio" name="readStatus" value="true" checked>
+                                <i class="form-icon"></i> Read
+                            </label>
+                            <label class="form-radio">
+                                <input type="radio" name="readStatus" value="false">
+                                <i class="form-icon"></i> Not Read
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <button type="submit" class="btn btn-primary column col-6 col-mx-auto mt-2">Add a new book!</button>
+                </div>
             </fieldset>
+        </form>
 
-        </section>
+        <!--TABLE-->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>title</th>
+                    <th>author</th>
+                    <th>pages</th>
+                    <th>status</th>
+                    <th>option</th>
+                </tr>
+            </thead>
+            <tbody id="bookRow"></tbody>
+        </table>
+    </div>
 
-        <section class="bookList mt-5">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Book</th>
-                        <th scope="col">Author</th>
-                        <th scope="col">Pages</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Options</th>
-                    </tr>
-                </thead>
-
-                <tbody id="bookRow">
-
-                </tbody>
-            </table>
-        </section>
-    </main>
 
     <script src="main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
 </body>
 
 </html>
